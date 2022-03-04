@@ -99,21 +99,26 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       
       } else {
 
-        api.get(`stock/${productId}`).then(response => {
+        const response = await api.get(`stock/${productId}`)
 
           const { data } = response;
-          
-          
+
           if(amount <= data.amount) {
             
-            const cartProduct = cart.find(c => c.id == productId);
+            cart.forEach(c => {
+            
+              if(c.id == productId) {
+  
+                c.amount = amount;
+              }
+            });
 
-            // cartProduct.amount = amount;
+            setCart([...cart]);
+            
+          } else {
 
-            // setCart([...cart.filter(c => c.id !== cartProduct.id), cartProduct]);
+            return;
           }
-          
-        })
       }
 
     } catch {
