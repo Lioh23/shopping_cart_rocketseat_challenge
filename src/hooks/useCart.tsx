@@ -35,7 +35,6 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   const addProduct = async (productId: number) => {
     try {
-      // TODO
       const currentCart = cart.find( c => c.id === productId);
 
       if(!currentCart) {
@@ -114,7 +113,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
             });
 
             setCart([...cart]);
-            
+
           } else {
 
             return;
